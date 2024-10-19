@@ -23,17 +23,17 @@ const router = createBrowserRouter([
       },
       {
         path: "services",
-        element: (
-            <Services />
-        ),
+        element: <Services />,
       },
       {
-path:'bookNow/:id',
-element:<PrivateProvider>
-   <BookNow />
-</PrivateProvider>,
-loader:({params})=>fetch(`http://localhost:5000/services/${params.id}`)
-
+        path: "bookNow/:id",
+        element: (
+          <PrivateProvider>
+            <BookNow />
+          </PrivateProvider>
+        ),
+        loader: ({ params }) =>
+          fetch(`https://rf-car-server-side.vercel.app/services/${params.id}`),
       },
 
       {
@@ -43,8 +43,7 @@ loader:({params})=>fetch(`http://localhost:5000/services/${params.id}`)
             <MyBooking />
           </PrivateProvider>
         ),
-        
-      }
+      },
     ],
   },
   {

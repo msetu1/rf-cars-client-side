@@ -26,17 +26,16 @@ const BookNow = () => {
       price,
       message,
     };
-    console.log(info);
+    
 
-    fetch(`http://localhost:5000/bookings`, {
+    fetch(`https://rf-car-server-side.vercel.app/bookings`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify(info),
     }).then((res) =>
-      res.json().then((data) => {
-        console.log(data);
+      res.json().then(() => {
         Swal.fire({
           title: "Success",
           text: "Order Confirmed Successfully",

@@ -4,26 +4,24 @@ import useUsers from "./useUsers";
 import { useNavigate } from "react-router-dom";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
-  withCredentials: true
+  baseURL: "https://rf-car-server-side.vercel.app",
+  withCredentials: true,
 });
 const useAxiosSecure = () => {
-    const {logOut}=useUsers()
-    const navigate =useNavigate()
+  const { logOut } = useUsers();
+  const navigate = useNavigate();
   useEffect(() => {
-    axiosSecure.interceptors.response.use(res => {
+    axiosSecure.interceptors.response.use(
+      (res) => {
         return res;
-      }, error => {
-        console.log("error track in the interceptor", error.response);
-        if (error.response.status === 401 ||error.response.status === 403) {
-          console.log("logout  the user");
+      },
+      (error) => {
+        if (error.response.status === 401 || error.response.status === 403) {
           logOut()
-          .then(()=>{
-            navigate('/')
-          })
-          .catch(error=>
-            console.log(error)
-          )
+            .then(() => {
+              navigate("/");
+            })
+            .catch((error) => console.log(error));
         }
       }
     );
